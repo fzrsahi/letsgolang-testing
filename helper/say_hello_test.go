@@ -40,3 +40,24 @@ func TestSubSayHello(t *testing.T) {
 		require.NotEqual(t, "Hello Ajul", result, "Result Must not be `Hello Fazrul`")
 	})
 }
+
+func TestTableTestSayHello(t *testing.T) {
+	tests := []struct {
+		name     string
+		request  string
+		expected string
+	}{
+		{name: "HelloWorld(Fazrul)", request: "Fazrul", expected: "Hello Fazrul"},
+		{name: "HelloWorld(John)", request: "John", expected: "Hello John"},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			myName := InsertName(test.request)
+			result := SayHelloTo(myName)
+			require.Equal(t, test.expected, result, "Result Must not be "+test.expected)
+
+		})
+
+	}
+}
